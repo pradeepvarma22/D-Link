@@ -38,13 +38,57 @@ contract DLink is
         external
         view
         override
-        returns (
-            bool upkeepNeeded,
-            bytes memory /* performData */
-        )
-    {}
+        returns (bool upkeepNeeded, bytes memory)
+    {
+        for (uint tokenId = 0; tokenId < tokenCounter; tokenId++) {
+            if (
+                block.timestamp - lastTimeStamps[tokenId + 1] >
+                intervals[tokenId + 1]
+            ) {
+                upkeepNeeded = true;
+                break;
+            }
+        }
+    }
 
-    function performUpkeep(bytes calldata) external override {}
+    function performUpkeep(bytes calldata) external override {
+        for (uint256 tokenId = 0; tokenId < tokenCounter; tokenId += 1) {
+            uint256 _currentTokenId = tokenId + 1;
+            uint256 _currentTokenIndex = currentState(_currentTokenId);
+            if (
+                _currentTokenIndex + 1 < IpfsTokenURIs[_currentTokenId].length
+            ) {
+                _currentTokenIndex += 1;
+                string memory newURI = IpfsTokenURIs[_currentTokenId][
+                    _currentTokenIndex
+                ];
+                _setTokenURI(_currentTokenId, newURI);
+                lastTimeStamps[_currentTokenId] = block.timestamp;
+            }
+        }
+    }
+
+    function currentState(uint256 _tokenId)
+        public
+        view
+        returns (uint256 _index)
+    {
+        string memory _uri = tokenURI(_tokenId);
+        for (
+            uint256 index = 0;
+            index < IpfsTokenURIs[_tokenId].length;
+            index += 1
+        ) {
+            bytes32 temp = keccak256(
+                abi.encodePacked(IpfsTokenURIs[_tokenId][index])
+            );
+            bytes32 temp_2 = keccak256(abi.encodePacked(_uri));
+            if (temp == temp_2) {
+                _index = index;
+            }
+        }
+        return _index;
+    }
 
     function tokenURI(uint256 tokenId)
         public
