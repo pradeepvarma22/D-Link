@@ -4,8 +4,6 @@ export default function Footer() {
         <div>
             <footer>
 
-                Footer
-
             </footer>
 
         </div>
