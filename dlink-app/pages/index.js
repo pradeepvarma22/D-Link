@@ -4,7 +4,7 @@ import Header from '../components/common/Head'
 import HomePage from '../components/home/main'
 
 export default function Home() {
-  
+
 
 
   return (
