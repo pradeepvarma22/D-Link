@@ -1,12 +1,13 @@
 
 
 
-export default function Main() {
+export default function HomePage() {
     return (
         <div>
-
             <main>
-                Hello World
+                <div>
+                
+                </div>
             </main>
         </div>
     )
