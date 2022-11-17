@@ -11,7 +11,28 @@ contract DLink is
     AutomationCompatibleInterface,
     Ownable
 {
-    constructor() ERC721("DLink NFT", "DLink") {}
+    uint256 public tokenCounter;
+    mapping(uint256 => uint256) public lastTimeStamps; // tokenId to lastTimeStamp default value: lastTimeStamp when tokenCreated
+    mapping(uint256 => uint256) public intervals; // tokenId to intervals
+    mapping(uint256 => string[]) public IpfsTokenURIs; // tokenId to array of cids
+
+    constructor() ERC721("DLink NFT", "DLink") {
+        tokenCounter = 0;
+    }
+
+    function safeMint(
+        address _to,
+        string[] memory _ipfsURIs,
+        uint256 _interval
+    ) external {
+        tokenCounter += 1;
+        uint256 tokenId = tokenCounter;
+        _safeMint(_to, tokenCounter);
+        IpfsTokenURIs[tokenId] = _ipfsURIs;
+        _setTokenURI(tokenId, _ipfsURIs[0]);
+        intervals[tokenId] = _interval;
+        lastTimeStamps[tokenId] = block.timestamp;
+    }
 
     function checkUpkeep(bytes calldata)
         external
