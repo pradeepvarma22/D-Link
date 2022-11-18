@@ -9,10 +9,6 @@ import { WALLET_INITIAL_STATE, walletReducer } from '../utility/reducers/wallet'
 export default function Home() {
 
   const [walletState, walletDispatch] = useReducer(walletReducer, WALLET_INITIAL_STATE);
-
-  console.log(walletState)
-
-
   
 
   return (
