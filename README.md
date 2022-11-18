@@ -16,3 +16,17 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 
 ![dashboard](dlink-app/public/D-Link%20dashboard.png)
 
+## Usage of Technologies
+
+### Chainlink
+
+[ChainLink Upkeep](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-contract/contracts/DLink.sol#L56)
+
+### IPFS
+
+[IPFS upload](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-app/components/main/index.js#L28)
+
+### Polygon
+
+[Mint to Polygon](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-app/components/main/index.js#L70)
+
