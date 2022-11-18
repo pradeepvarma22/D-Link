@@ -49,13 +49,7 @@ export default function HomePage({ walletState, walletDispatch }) {
                             </div>
                         </div>
                         <div className="flex justify-around md:block mt-8 md:mt-0 md:flex-1">
-                            <div className="relative">
-                                <img src='dist/assets/Highlight1.svg' alt="" className="absolute -top-16 -left-10" />
-                            </div>
-                            <img src='dlink-home.gif' alt="Macbook" />
-                            <div className="relative">
-                                <img src='dist/assets/Highlight2.svg' alt="" className="absolute -bottom-10 -right-6" />
-                            </div>
+                            <img src='dlink-home.gif' alt="Dlink home page" />
                         </div>
                     </section>
 

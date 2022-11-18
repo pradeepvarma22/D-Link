@@ -21,13 +21,15 @@ export default function MainPage({ walletState, walletDispatch }) {
     const [files, setFiles] = useState([]);
     const [openseaURL, setOpenseaURL] = useState(null);
     const [txn, setTxn] = useState();
+    const [uploadLoader, setUploadLoader] = useState(false);
 
+    console.log(fileUrl)
 
     const handleUpload = async (e) => {
 
-
+        setUploadLoader(true);
         const imgFile = e.target.files[0];
-        setFiles([...files, imgFile]);
+        setFiles([...files, URL.createObjectURL(imgFile)]);
         const token = process.env.NEXT_PUBLIC_NFT_STORAGE_KEY
         const client = new NFTStorage({ token })
 
@@ -40,6 +42,7 @@ export default function MainPage({ walletState, walletDispatch }) {
         setFileUrl([...fileUrl, metadata.url]);
         e.target.value = null;
 
+        setUploadLoader(false);
 
 
         /*
@@ -86,9 +89,6 @@ export default function MainPage({ walletState, walletDispatch }) {
     return (
         <div>
 
-
-
-
             <div>
 
 
@@ -101,7 +101,7 @@ export default function MainPage({ walletState, walletDispatch }) {
                                 <div className="py-1 px-1">
                                     <div className="mb-4">
                                         <label
-                                            for="nftname"
+                                            htmlFor="nftname"
                                             className="mb-3 block text-base font-medium text-[#07074D]"
                                         >
                                             NFT Name:
@@ -117,7 +117,7 @@ export default function MainPage({ walletState, walletDispatch }) {
                                     </div>
                                     <div className="mb-5">
                                         <label
-                                            for="nftdescription"
+                                            htmlFor="nftdescription"
                                             className="mb-3 block text-base font-medium text-[#07074D]"
                                         >
                                             Description:
@@ -134,7 +134,7 @@ export default function MainPage({ walletState, walletDispatch }) {
 
                                     <div className="mb-5">
                                         <label
-                                            for="interval"
+                                            htmlFor="interval"
                                             className="mb-3 block text-base font-medium text-[#07074D]"
                                         >
                                             Interval:
@@ -157,26 +157,26 @@ export default function MainPage({ walletState, walletDispatch }) {
 
                                     <form onSubmit={handleAttributes} className="flex flex-wrap-mx-3 mb-2">
                                         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" for="trait-type">
+                                            <label className="block uppercase tracking-wide text-xs font-bold mb-2" htmlFor="trait-type">
                                                 Trait Type
                                             </label>
                                             <input name="trait_type" className="appearance-none block w-full   text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="trait-type" type="text" placeholder="Ex: cuteness" />
                                         </div>
                                         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 
-                                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="trait-value">
+                                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="trait-value">
                                                 Value
                                             </label>
                                             <input name="value" className="appearance-none block w-full   text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="trait-value" type="number" placeholder="Ex: 5" />
                                         </div>
                                         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="max_value">
+                                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="max_value">
                                                 Max value
                                             </label>
                                             <input name="max_value" className="appearance-none block w-full   text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="max_value" type="text" placeholder="Ex: 10" />
                                         </div>
                                         <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="trait-submit">
+                                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="trait-submit">
                                                 &nbsp;
                                             </label>
                                             <input className="appearance-none block w-full   text-gray-700 border bg-blue-100 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:border-gray-500" id="trait-submit" type="submit" value="Add" />
@@ -185,32 +185,43 @@ export default function MainPage({ walletState, walletDispatch }) {
 
 
 
+                                    {uploadLoader ? (
+                                        <div className="mb-6 px-[29%] pt-4">
+                                            <button disabled type="button" class="py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center">
+                                                <svg role="status" class="inline mr-2 w-4 h-4 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="#1C64F2" />
+                                                </svg>
+                                                Uploading to IPFS...
+                                            </button>
 
-
-                                    <div className="mb-6 pt-4">
-                                        <label className="mb-5 block text-xl font-semibold text-[#07074D]">
-                                            Upload File
-                                        </label>
-
-                                        <div className="mb-8">
-                                            <input type="file" name="file" onChange={handleUpload} id="file" className="sr-only" />
-                                            <label
-                                                for="file"
-                                                className="relative flex min-h-[150px] items-center justify-center rounded-md border border-dashed border-[#e77b7b] p-8 text-center"
-                                            >
-                                                <div>
-
-                                                    <span
-                                                        className="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
-                                                    >
-                                                        Browse
-                                                    </span>
-                                                </div>
-                                            </label>
                                         </div>
+                                    ) : (
+                                        <div className="mb-6 pt-4">
+                                            <label className="mb-5 block text-xl font-semibold text-[#07074D]">
+                                                Upload File
+                                            </label>
+
+                                            <div className="mb-8">
+                                                <input type="file" name="file" onChange={handleUpload} id="file" className="sr-only" />
+                                                <label
+                                                    htmlFor="file"
+                                                    className="relative flex min-h-[150px] items-center justify-center rounded-md border border-dashed border-[#e77b7b] p-8 text-center"
+                                                >
+                                                    <div>
+
+                                                        <span
+                                                            className="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
+                                                        >
+                                                            Browse
+                                                        </span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    )}
 
 
-                                    </div>
 
 
 
@@ -224,7 +235,50 @@ export default function MainPage({ walletState, walletDispatch }) {
                         </div>
                     </div>
                     <div>
-                        2
+                        <div className="grid grid-rows-2">
+
+                            <div>
+                                <div>
+                                    <div className="grid grid-cols-1 py-10 pr-24 w-9/12 h-5/6">
+                                        <div className="container mx-auto">
+                                            <div className="grid-cols-3 p-20 space-y-2 bg-yellow-200 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
+                                                {files && files.map((item, index) => (
+                                                    <div className="w-full rounded" key={index}>
+                                                        <img src={item}
+                                                            alt="image" />
+                                                    </div>
+                                                ))}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="grid grid-cols-2">
+                                    <div>
+                                        <div>{nftName}</div>
+                                        <div>{nftDescription}</div>
+                                        {interval ? (
+                                            <div>{interval} Seconds</div>
+                                        ) : (
+                                            <div></div>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {attributes && attributes.map((item, index) => (
+                                                <div className="w-full rounded" key={index}>
+                                                   <div>{item.trait_type} : {item.value}/{item.max_value}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
 
                 </div>

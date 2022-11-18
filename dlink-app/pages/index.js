@@ -9,7 +9,7 @@ import { WALLET_INITIAL_STATE, walletReducer } from '../utility/reducers/wallet'
 export default function Home() {
 
   const [walletState, walletDispatch] = useReducer(walletReducer, WALLET_INITIAL_STATE);
-  
+
 
   return (
     <div>
@@ -19,7 +19,7 @@ export default function Home() {
         walletState.isWalletConnected ?
           (
             <div>
-              <MainPage walletState={walletState} walletDispatch={walletDispatch}/>
+              <MainPage walletState={walletState} walletDispatch={walletDispatch} />
             </div>
           ) :
           (
