@@ -6,3 +6,13 @@ Initially user needs to connect his metamask wallet upon which he is redirected 
 
 ## How we built it
 We built it used Nextjs to build our application. Tailwind CSS is used to design our application. Solidity for writing Smart Contracts, hardhat for deploying them. Chainlink is used for highly reliable automation based on time set according to the user choice. We chose Polygon chain to deploy the smart contract.
+
+## UI
+### Home Page
+
+![home](dlink-app/public/D-Link%20home.png)
+
+### Dashboard
+
+![dashboard](dlink-app/public/D-Link%20dashboard.png)
+
