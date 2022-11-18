@@ -17,7 +17,8 @@ export default function MainPage({ walletState, walletDispatch }) {
     const [interval, setInterval] = useState(0);
     const [fileUrl, setFileUrl] = useState([]);
     const [files, setFiles] = useState([]);
-
+    const [openseaURL, setOpenseaURL] = useState(null);
+    const [txn, setTxn] = useState();
     console.log('xxx', fileUrl)
     console.log('xxx', files)
 
@@ -25,13 +26,13 @@ export default function MainPage({ walletState, walletDispatch }) {
 
 
         const imgFile = e.target.files[0];
-        setFiles([...files,imgFile ]);
+        setFiles([...files, imgFile]);
         const token = process.env.NEXT_PUBLIC_NFT_STORAGE_KEY
         const client = new NFTStorage({ token })
 
         const metadata = await client.store({
             name: nftName,
-            description:nftDescription,
+            description: nftDescription,
             image: imgFile,
             attributes: attributes
         });
@@ -61,17 +62,23 @@ export default function MainPage({ walletState, walletDispatch }) {
         e.target.value = null;
         */
     }
-    
+
     const handleMint = async () => {
         const provider = walletState.provider
         const signer = await provider.getSigner();
         const userAddress = await signer.getAddress();
-        
+
         const dnftContract = new ethers.Contract(DLINK_ADDRESS, DLINK_ABI, signer);
-        console.log(userAddress,fileUrl ,  interval)
-        let txn = await dnftContract.safeMint(userAddress,fileUrl ,  interval);
+        console.log(userAddress, fileUrl, interval)
+        let txn = await dnftContract.safeMint(userAddress, fileUrl, interval);
         txn = await txn.wait();
-        console.log(txn)
+        const tokenCounter = await dnftContract.tokenCounter();
+        const deployedAt = `https://testnets.opensea.io/assets/mumbai/0x4ea8e4a9111ac32a3a198be66c034d4f6f5f9f7c/${tokenCounter}`
+        const txnHash = `https://mumbai.polygonscan.com/tx/${txn.transactionHash}`
+        setOpenseaURL(deployedAt)
+        setTxn(txnHash);
+        alert('Minted')
+        
     }
 
 
@@ -99,6 +106,31 @@ export default function MainPage({ walletState, walletDispatch }) {
 
             <div>
                 <button onClick={handleMint}>Mint</button>
+            </div>
+
+
+            {"DATA RESULT"}
+            <div>
+                <div>
+
+
+                    <div>TXN RESULT</div>
+                    <div>
+                        {txn && (
+                            <div>
+                                <a href={txn} target="_blank">{txn}</a>
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        {openseaURL && (
+                            <div>
+                                <a href={openseaURL} target="_blank">{openseaURL}</a>
+                            </div>
+                        )}
+                    </div>
+
+                </div>
             </div>
 
         </div>
