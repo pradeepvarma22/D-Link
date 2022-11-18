@@ -1,4 +1,4 @@
-export const DLINK_ADDRESS = ""
+export const DLINK_ADDRESS = "0x4Ea8e4a9111aC32a3A198bE66C034D4f6f5F9f7c"
 
 export const DLINK_ABI = [
     {

@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { NFTStorage, File } from "nft.storage";
+import { ethers } from "ethers";
+import { DLINK_ABI, DLINK_ADDRESS } from "../../constants/contract/DLink";
 // import { Web3Storage, getFilesFromPath } from 'web3.storage'
 
 
@@ -12,6 +14,7 @@ export default function MainPage({ walletState, walletDispatch }) {
     const [nftName, setNftName] = useState("")
     const [nftDescription, setNftDescription] = useState("")
     const [attributes, setAttributes] = useState([]);
+    const [interval, setInterval] = useState(0);
     const [fileUrl, setFileUrl] = useState([]);
     const [files, setFiles] = useState([]);
 
@@ -34,7 +37,7 @@ export default function MainPage({ walletState, walletDispatch }) {
         });
         setFileUrl([...fileUrl, metadata.url]);
         e.target.value = null;
-        
+
 
 
         /*
@@ -58,12 +61,17 @@ export default function MainPage({ walletState, walletDispatch }) {
         e.target.value = null;
         */
     }
-
-    const handleMint = async () => {
-
-
-        
     
+    const handleMint = async () => {
+        const provider = walletState.provider
+        const signer = await provider.getSigner();
+        const userAddress = await signer.getAddress();
+        
+        const dnftContract = new ethers.Contract(DLINK_ADDRESS, DLINK_ABI, signer);
+        console.log(userAddress,fileUrl ,  interval)
+        let txn = await dnftContract.safeMint(userAddress,fileUrl ,  interval);
+        txn = await txn.wait();
+        console.log(txn)
     }
 
 
@@ -71,6 +79,7 @@ export default function MainPage({ walletState, walletDispatch }) {
         <div>
             <input type="text" onChange={(e) => setNftName(e.target.value)} placeholder="NFT NAME" />
             <input type="text" onChange={(e) => setNftDescription(e.target.value)} placeholder="NFT Description" />
+            <input type="number" onChange={(e) => setInterval(e.target.value)} placeholder="Interval" />
 
 
             <div>
