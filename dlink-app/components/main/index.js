@@ -1,7 +1,9 @@
-import { useState } from "react"
-import { NFTStorage, File } from "nft.storage";
 import { ethers } from "ethers";
+import { File, NFTStorage } from "nft.storage";
+import { useState } from "react"
+
 import { DLINK_ABI, DLINK_ADDRESS } from "../../constants/contract/DLink";
+
 // import { Web3Storage, getFilesFromPath } from 'web3.storage'
 
 
@@ -118,14 +120,14 @@ export default function MainPage({ walletState, walletDispatch }) {
                     <div>
                         {txn && (
                             <div>
-                                <a href={txn} target="_blank">{txn}</a>
+                                <a href={txn} target="_blank" rel="noopener noreferrer">{txn}</a>
                             </div>
                         )}
                     </div>
                     <div>
                         {openseaURL && (
                             <div>
-                                <a href={openseaURL} target="_blank">{openseaURL}</a>
+                                <a href={openseaURL} target="_blank" rel="noopener noreferrer">{openseaURL}</a>
                             </div>
                         )}
                     </div>
