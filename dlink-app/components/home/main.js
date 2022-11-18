@@ -30,14 +30,14 @@ export default function HomePage({ walletState, walletDispatch }) {
                         className="pt-24 md:mt-0 md:h-screen flex flex-col justify-center text-center md:text-left md:flex-row md:justify-between md:items-center lg:px-48 md:px-12 px-4 bg-secondary">
                         <div className="md:flex-1 md:mr-10">
                             <h1 className="font-pt-serif text-5xl font-bold mb-7">
-                                Mint Your Dynamic
+                                Mint Your {"  "}
                                 <span className="bg-underline1 bg-left-bottom bg-no-repeat pb-2 bg-100%">
-                                    NFT
+                                    D-NFT
                                 </span>
                             </h1>
                             <p className="font-pt-serif font-normal mb-7">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum harum
-                                tempore consectetur voluptas, cumque nobis laboriosam voluptatem.
+                                DLink is the world&apos;s simplest Dynamic NFT creation tool.
+                                Create your own Dynamic NFT in just few clicks.
                             </p>
                             <div className="font-montserrat" onClick={connect}>
                                 <button className="bg-black px-6 py-4 rounded-lg border-2 border-black border-solid text-white mr-2 mb-2">
