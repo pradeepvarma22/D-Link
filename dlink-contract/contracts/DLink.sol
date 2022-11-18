@@ -15,6 +15,7 @@ contract DLink is
     mapping(uint256 => uint256) public lastTimeStamps; // tokenId to lastTimeStamp default value: lastTimeStamp when tokenCreated
     mapping(uint256 => uint256) public intervals; // tokenId to intervals
     mapping(uint256 => string[]) public IpfsTokenURIs; // tokenId to array of cids
+    mapping(uint256 => bool) public isLast; // tokenId to array of cids
 
     constructor() ERC721("DLink NFT", "DLink") {
         tokenCounter = 0;
@@ -40,10 +41,11 @@ contract DLink is
         override
         returns (bool upkeepNeeded, bytes memory)
     {
-        for (uint tokenId = 0; tokenId < tokenCounter; tokenId++) {
+        for (uint256 tokenId = 0; tokenId < tokenCounter; tokenId++) {
             if (
                 block.timestamp - lastTimeStamps[tokenId + 1] >
-                intervals[tokenId + 1]
+                intervals[tokenId + 1] &&
+                isLast[tokenId + 1] == false
             ) {
                 upkeepNeeded = true;
                 break;
@@ -54,9 +56,13 @@ contract DLink is
     function performUpkeep(bytes calldata) external override {
         for (uint256 tokenId = 0; tokenId < tokenCounter; tokenId += 1) {
             uint256 _currentTokenId = tokenId + 1;
+
             uint256 _currentTokenIndex = currentState(_currentTokenId);
+
             if (
-                _currentTokenIndex + 1 < IpfsTokenURIs[_currentTokenId].length
+                block.timestamp - lastTimeStamps[_currentTokenId] >
+                intervals[_currentTokenId] &&
+                isLast[_currentTokenId] == false
             ) {
                 _currentTokenIndex += 1;
                 string memory newURI = IpfsTokenURIs[_currentTokenId][
@@ -64,6 +70,13 @@ contract DLink is
                 ];
                 _setTokenURI(_currentTokenId, newURI);
                 lastTimeStamps[_currentTokenId] = block.timestamp;
+
+                if (
+                    _currentTokenIndex >=
+                    IpfsTokenURIs[_currentTokenId].length - 1
+                ) {
+                    isLast[_currentTokenId] = true;
+                }
             }
         }
     }
@@ -87,6 +100,7 @@ contract DLink is
                 _index = index;
             }
         }
+
         return _index;
     }
 
