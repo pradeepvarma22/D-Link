@@ -18,11 +18,8 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 
 ## Usage of Technologies
 
-### Chainlink
+### Chainlink 
 
-[ChainLink Upkeep](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-contract/contracts/DLink.sol#L56)
-
-### Chainlink automation
 [Chain automation](https://automation.chain.link/mumbai/46277873803391044297138286140250922453207600799325432450806265802817893284589)
 
 ### IPFS
@@ -32,4 +29,8 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 ### Polygon
 
 [Mint to Polygon](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-app/components/main/index.js#L70)
+
+### Smart Contract
+
+[Smart Contract code](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-contract/contracts/DLink.sol)
 
