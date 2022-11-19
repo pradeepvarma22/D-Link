@@ -239,9 +239,9 @@ export default function MainPage({ walletState, walletDispatch }) {
 
                             <div>
                                 <div>
-                                    <div className="grid grid-cols-1 py-10 pr-24 w-9/12 h-5/6">
+                                    <div className="grid grid-cols-1 py-10 w-9/12 h-5/6">
                                         <div className="container mx-auto">
-                                            <div className="grid-cols-3 p-20 space-y-2 bg-yellow-200 lg:space-y-0 lg:grid lg:gap-3 lg:grid-rows-3">
+                                            <div className="grid-cols-3 bg-slate-50 lg:grid lg:grid-rows-2">
                                                 {files && files.map((item, index) => (
                                                     <div className="w-full rounded" key={index}>
                                                         <img src={item}
