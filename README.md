@@ -16,6 +16,10 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 
 ![dashboard](dlink-app/public/D-Link%20dashboard.png)
 
+## Working
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fizWFQYvU8w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Usage of Technologies
 
 ### Chainlink 
@@ -34,5 +38,15 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 
 [Smart Contract code](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-contract/contracts/DLink.sol)
 
-### Submission Link
+
+
+## Contributors
+<a href="https://github.com/pradeepvarma22/d-link/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=pradeepvarma22/d-link" />
+</a>
+
+pradeep shashank surendra
+
+## Submission link
 [Devpost Submission](https://devpost.com/software/dlink)
+
