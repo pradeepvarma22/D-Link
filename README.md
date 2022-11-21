@@ -1,5 +1,5 @@
 # DLink
-A platform for users to create dNFTs on Polygon in a simple manner within a few clicks, similar to MintNft by Polygon which offers the same services for traditional NFTs.
+A platform for users to create Dynamic NFTs on Polygon in a simple manner within a few clicks, similar to MintNft.today by Polygon which offers the same services for traditional NFTs.
 
 ## What it does
 Initially user needs to connect his metamask wallet upon which he is redirected to the application dashboard. Here user can fill in the details of the dynamic NFT he wants to create such as name, description, traits. The user needs to upload the images that he wants to feature in his dNFT one by one, which are uploaded to IPFS simultaneously. User can set the time upon which the NFT should change accordingly. Chainlink Upkeep for automates the NFT updating process in a timely manner according to user's settings.
