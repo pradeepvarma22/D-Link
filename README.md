@@ -34,3 +34,5 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 
 [Smart Contract code](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-contract/contracts/DLink.sol)
 
+### Submission Link
+[Devpost Submission](https://devpost.com/software/dlink)
