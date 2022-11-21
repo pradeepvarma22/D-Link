@@ -18,7 +18,8 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 
 ## Working
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fizWFQYvU8w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Link](https://www.youtube.com/embed/fizWFQYvU8w)
+
 
 ## Usage of Technologies
 
@@ -28,15 +29,15 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 
 ### IPFS
 
-[IPFS upload](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-app/components/main/index.js#L28)
+[IPFS upload](https://github.com/pradeepvarma22/D-Link/blob/b5ba3b01906e0631d26a9a2ccb3482cb0ca9a3ed/dlink-app/components/main/index.js#L28)
 
 ### Polygon
 
-[Mint to Polygon](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-app/components/main/index.js#L70)
+[Mint to Polygon](https://github.com/pradeepvarma22/D-Link/blob/master/dlink-app/components/main/index.js#L70)
 
 ### Smart Contract
 
-[Smart Contract code](https://github.com/surendravarmadendukuri/DLink/blob/master/dlink-contract/contracts/DLink.sol)
+[Smart Contract code](https://github.com/pradeepvarma22/D-Link/blob/master/dlink-contract/contracts/DLink.sol)
 
 
 
