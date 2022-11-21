@@ -18,7 +18,7 @@ We built it used Nextjs to build our application. Tailwind CSS is used to design
 
 ## Working
 
-[Link](https://www.youtube.com/embed/fizWFQYvU8w)
+[Video Link](https://www.youtube.com/embed/fizWFQYvU8w)
 
 
 ## Usage of Technologies
